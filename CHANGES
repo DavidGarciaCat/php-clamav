@@ -1,0 +1,50 @@
+Version 0.15
+------------
+2009-Dec-09:	Add phpclamav_test.php for testing function and valid is extension is correctly loaded.
+2009-Dec-08:	Change defaults values in the clamav.ini with the correct default ClamAV values.
+2009-Dec-08:    Suppress clamav.archivememlim parameters that no longuer support by clamav 0.95.x.
+2009-Dec-08:    Update documentation.
+2009-Dec-08:    Add clamav.maxscansize parameters.
+2009-Dec-07:    Fix security bug that doesn't scan file bigger than ~20MB.
+2009-Dec-07:    Show loaded parameters on php_info().
+2009-Dec-07:    cl_scanfile() now return the result of ClamAV function.
+2009-Dec-07:    cl_scanfile() now return the virus name if found in a parameters.
+2009-Dec-07:    Suppress cl_scanfile_ex() function.
+2009-Dec-07:    Cleanup code.
+
+Version 0.14
+------------
+2009-Oct-24:    Update documentations files.
+2009-Oct-24:    Create clamav.ini under php/conf.d instead of modify php.ini
+2009-Oct-24:    Fix lintian error and warning on Debian/Ubuntu packaging.
+2009-Oct-24:    Fix debuild warning.
+2009-Oct-24:    Minor fix (warning and esthetic code).
+2009-Oct-21:    Add all libclamav returns code.
+2009-Oct-21:    Suppress all warning messages on compilation.
+2009-Oct-21:    Reorganizing source code (ident, spaces, etc ...).
+2009-Oct-21:    Delete compatibility functions (clam_scan_file, clam_get_version).
+2009-Oct-21:    Regenere somes compilation files by ext_skel from php v5.2.
+2009-Oct-20:    Add versions informations on phpinfo() view.
+2009-Oct-20:    Forked to php-clamav.
+
+Version 0.13
+------------
+2007-Aug-11:	Modified for compatibility with the Clamav 0.9 API
+
+Version 0.12a
+-------------
+2005-Oct-08:	Added return values for cl_scanfile_ex() and cl_scanbuff_ex().
+
+Version 0.12
+-------------
+2005-Sep-27:	Code comments, standarization and identation.
+2005-Sep-26:	Added compatibility with the php_clam code.
+2005-Sep-22:	Added cl_pretcode() function.
+2005-Sep-19:	Added cl_scanfile_ex() and cl_scanbuff_ex() functions.
+2005-Aug-29:	Added cl_setlimits() function.
+
+Version 0.11
+-------------
+2005-Aug-17:	Every request (RINIT) will check if the database has changed, it will reload the database if changes are detected.
+2005-Aug-15:	Added #define OnUpdateLong OnUpdateInt for PHP4 compatibility.
+
