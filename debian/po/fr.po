@@ -1,0 +1,47 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: php-clamav@packages.debian.org\n"
+"POT-Creation-Date: 2009-12-09 19:43+0100\n"
+"PO-Revision-Date: 2005-10-17 01:52+0100\n"
+"Last-Translator: Aurelien Ricard <r.aurelien@wanadoo.fr>\n"
+"Language-Team: FRANCE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: FR\n"
+"X-Poedit-Country: FR\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+
+#. Type: boolean
+#. Description
+#: ../php5-clamav.templates:1001
+#, fuzzy
+#| msgid "Configure php.ini for clamavLib?"
+msgid "Configure clamav.ini option file for php-clamav?"
+msgstr "Faut-il configurer le fichier php.ini pour clamavLib ?"
+
+#. Type: boolean
+#. Description
+#: ../php5-clamav.templates:1001
+#, fuzzy
+#| msgid ""
+#| "These scripts can add the necessary options for clamavLib to the PHP5 ini "
+#| "file."
+msgid ""
+"These scripts can add the necessary options for php-clamav to the PHP5 ini "
+"extension directory."
+msgstr ""
+"Il est possible d'ajouter automatiquement les options nécessaires pour "
+"clamavLib dans le fichier de paramètres de PHP5."
+
+#~ msgid ""
+#~ "These scripts can add the necessary options for clamavLib to the PHP4 ini "
+#~ "file."
+#~ msgstr ""
+#~ "Il est possible d'ajouter automatiquement les options nécessaires pour "
+#~ "clamavLib dans le fichier de paramètres de PHP4."
