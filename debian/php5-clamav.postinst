@@ -1,0 +1,33 @@
+#!/bin/sh
+# Copyright 2009 Argos <argos66@gmail.com>
+set -e
+. /usr/share/debconf/confmodule
+db_get php5-clamav/edit_phpini || true
+if [ "$RET" = true ]; then
+#Deletion of older php-clamav method
+    for ppkg in apache cli cgi apache2; do
+        if [ -f /etc/php5/$ppkg/php.ini ]; then
+            if grep -q "clamav.so" /etc/php5/$ppkg/php.ini; then
+                phptemp=`mktemp`
+                sed "s/extension=clamav.so//;s/clamav\..*//;s/\[clamav\]//;" < /etc/php5/$ppkg/php.ini > $phptemp
+                mv -f $phptemp /etc/php5/$ppkg/php.ini
+                rm -f $phptemp
+            fi
+        fi
+    done
+#Create clamav.ini file
+    printf "extension=clamav.so\n" > /etc/php5/conf.d/clamav.ini
+    printf "[clamav]\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.dbpath=\"/var/lib/clamav\"\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.maxreclevel=16\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.maxfiles=10000\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.maxfilesize=26214400\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.maxscansize=104857600\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.keeptmp=0\n" >> /etc/php5/conf.d/clamav.ini
+    printf "clamav.tmpdir=\"/tmp\"\n" >> /etc/php5/conf.d/clamav.ini
+
+    echo "Configure clamav.ini files....."
+fi
+
+#DEBHELPER#
+

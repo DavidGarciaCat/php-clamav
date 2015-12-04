@@ -1,0 +1,21 @@
+#!/bin/sh
+# Copyright 2009 Argos <argos66@gmail.com>
+set -e
+for ppkg in apache cli cgi apache2; do
+	if [ -f /etc/php5/$ppkg/php.ini ]; then
+		if grep -q "clamav.so" /etc/php5/$ppkg/php.ini; then
+			phptemp=`mktemp`
+			sed "s/extension=clamav.so//;s/clamav\..*//;s/\[clamav\]//;" < /etc/php5/$ppkg/php.ini > $phptemp
+			mv -f $phptemp /etc/php5/$ppkg/php.ini
+			rm -f $phptemp
+		fi
+	fi
+done
+if [ -f /etc/php5/conf.d/clamav.ini ]; then
+    if grep -q "clamav.so" /etc/php5/conf.d/clamav.ini; then
+        rm -f /etc/php5/conf.d/clamav.ini
+    fi
+fi
+
+#DEBHELPER#
+
