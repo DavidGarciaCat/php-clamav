@@ -1,0 +1,77 @@
+#!/usr/bin/make -f
+BUILD=$(CURDIR)/debian/php-clamav
+PHP_EXT=$(shell /usr/bin/php-config --extension-dir)
+
+#export DH_VERBOSE=1
+
+CFLAGS = -O2 -Wall
+CFLAGS += -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+ifneq (,$(findstring debug,$(DEB_BUILD_OPTIONS)))
+	CFLAGS += -g
+	DEBUG := --enable-debug
+else
+	DEBUG := --disable-debug
+endif
+
+build:
+	@echo "Not use this."
+
+build-stamp:
+	dh_testdir
+	touch build-stamp
+
+build-stamp-php5: build-stamp
+	phpize --clean
+	phpize
+	chmod a+x ./configure
+	./configure --with-clamav --prefix=$(BUILD)/usr --with-php-config=/usr/bin/php-config
+	-$(MAKE) DESTDIR=$(BUILD)
+	touch build-stamp-php5
+
+clean:
+	dh_testdir
+	dh_testroot
+	debconf-updatepo
+	rm -rf build-stamp build-stamp-php5
+	phpize --clean
+	dh_clean
+
+install: build-php5
+
+build-php5: DH_OPTIONS=-pphp-clamav
+
+build-php5: build-stamp-php5
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	mkdir -p debian/php-clamav$(PHP_EXT)
+	install -m 644 -o root -g root modules/clamav.so debian/php-clamav$(PHP_EXT)/clamav.so
+
+binary-indep:
+
+binary-arch-php5: DH_OPTIONS='--package=php-clamav'
+
+binary-arch-php5: build-php5
+	dh_testdir
+	dh_testroot
+	dh_installdirs
+	dh_installchangelogs CHANGES 
+	dh_installdebconf
+	dh_installdocs
+	dh_install
+	dh_link
+	dh_strip
+	dh_compress
+	dh_fixperms 
+	dh_installdeb --package=php-clamav
+	dh_shlibdeps
+	echo "php:Depends=phpapi-`php-config5 --phpapi`" >> debian/php-clamav.substvars
+	dh_gencontrol --package=php-clamav
+	dh_md5sums 
+	dh_builddeb --package=php-clamav 
+
+binary-arch: binary-arch-php5
+
+binary: binary-indep binary-arch
+
+.PHONY: build-php5 clean binary-indep binary-arch binary install
